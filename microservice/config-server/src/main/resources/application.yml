@@ -7,8 +7,19 @@ spring:
   application:
     name: config-server
 
+  # Aggressive exclusion of metrics and actuator
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.metrics.web.tomcat.TomcatMetricsAutoConfiguration
+      - org.springframework.boot.actuate.autoconfigure.observation.ObservationAutoConfiguration
+
   cloud:
     config:
+      enabled: false
+      import-check:
+        enabled: false
       server:
         git:
           uri: https://github.com/celotts/microservice-config.git
@@ -16,31 +27,26 @@ spring:
           password: ${GIT_PASSWORD}
           default-label: main
           clone-on-start: true
-          timeout: 10  # ⏳ Asegura que no haya tiempo de espera demasiado corto
+          timeout: 10
 
-eureka:
-  instance:
-    prefer-ip-address: true
-    hostname: ${HOSTNAME:localhost}  # 📍 Usa el nombre de host adecuado
-    instance-id: "${spring.application.name}:${random.value}:${server.port}"
-  client:
-    registry-fetch-interval-seconds: 10  # Espera 10 segundos antes de buscar instancias
-    initial-instance-info-replication-interval-seconds: 10  # Evita la auto-registración instantánea
-    service-url:
-      defaultZone: ${EUREKA_SERVER_URL:http://registry-server:8761/eureka}
-
+# Completely disable actuator
 management:
   endpoints:
-    web:
-      exposure:
-        include: "health,info,metrics,env,configprops"
+    enabled-by-default: false
+  metrics:
+    enable:
+      all: false
   health:
-    show-details: always
-  server:
-    port: 7778  # 💡 Separado del puerto principal para evitar conflictos
+    defaults:
+      enabled: false
 
+# Disable system metrics
+system:
+  metrics:
+    enabled: false
+
+# Logging configuration
 logging:
   level:
-    org.springframework.cloud.config: DEBUG
-    org.springframework.cloud: DEBUG
-    org.springframework.web: DEBUG
+    root: WARN
+    org.springframework: WARN

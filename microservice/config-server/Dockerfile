@@ -1,15 +1,19 @@
 FROM openjdk:17-jdk-slim
 
-WORKDIR /app
+# Install curl for health checks
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-# Instalar herramientas necesarias
-RUN apt update && apt install -y curl
+# Add JVM options to disable metrics and monitoring
+ENV JAVA_TOOL_OPTIONS="-XX:+UseContainerSupport \
+    -Dspring.jmx.enabled=false \
+    -Dcom.netflix.servo.DefaultMonitorRegistry.disable=true \
+    -Dmanagement.metrics.export.simple.enabled=false \
+    -Dmanagement.endpoints.enabled-by-default=false \
+    -Dio.micrometer.system-metrics.enabled=false \
+    -Dmanagement.metrics.enable.process=false \
+    -Dmanagement.metrics.enable.system=false \
+    -Dspring.autoconfigure.exclude=org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfiguration,org.springframework.boot.actuate.autoconfigure.metrics.SystemMetricsAutoConfiguration,org.springframework.boot.actuate.autoconfigure.metrics.web.tomcat.TomcatMetricsAutoConfiguration"
 
-# Copiar el JAR
 COPY target/*.jar app.jar
 
-# Puerto
-EXPOSE 7777
-
-# Ejecutar con opciones para deshabilitar métricas
-ENTRYPOINT ["java", "-noverify", "-XX:TieredStopAtLevel=1", "-Dservlet.registerMBeans=false", "-Dio.micrometer.system-metrics.enabled=false", "-Dmanagement.metrics.enable.system=false", "-Dmanagement.metrics.enable.process=false", "-Dmanagement.metrics.enable.jvm=false", "-Dspring.jmx.enabled=false", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app.jar"]
