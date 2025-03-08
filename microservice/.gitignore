@@ -1,5 +1,22 @@
+# Archivos y directorios de Node.js
 node_modules/
 package-lock.json
 package.json
-../*
-../*
+
+# Directorios superiores
+../.husky/
+../IdeaProjects/
+../api_crud_menu/
+../api_crud_menu_postgres/
+../api_crud_user_mysql/
+../api_reservation_Spring_Boot/
+../api_reservation_old/
+../dockerize.mysql.zip
+../microservice-udemy/
+../microservices_architecture.png
+../microservicio_old/
+../test-file.txt
+../test.txt
+
+# Regla general para ignorar todo fuera del directorio actual
+../*/
