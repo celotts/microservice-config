@@ -31,3 +31,33 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignorar carpetas específicas
+api_crud_menu_postgres/
+api_crud_user_mysql/
+api_reservation_old/
+api_reservation_Spring_Boot/
+companies-crud/
+menu_maven_old/
+microservicio_old/
+microservice-udemy/
+
+IdeaProjects/
+api_crud_menu/
+
+# Archivos de Node.js
+node_modules/
+package-lock.json
+package.json
+# Ignorar archivos específicos
+
+*.zip
+*.xml
+*.txt
+*.sql
+*.html
+.DS_Store
+.idea/
+
+*.log
+
