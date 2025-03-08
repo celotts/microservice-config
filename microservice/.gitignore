@@ -1,22 +1,38 @@
-# Archivos y directorios de Node.js
-node_modules/
-package-lock.json
-package.json
+# Directorios específicos
+api_crud_menu_postgres/
+api_crud_user_mysql/
+api_reservation_old/
+api_reservation_Spring_Boot/
+companies-crud/
+menu_maven_old/
+microservicio_old/
+microservice-udemy/
 
-# Directorios superiores
-../.husky/
-../IdeaProjects/
-../api_crud_menu/
-../api_crud_menu_postgres/
-../api_crud_user_mysql/
-../api_reservation_Spring_Boot/
-../api_reservation_old/
-../dockerize.mysql.zip
-../microservice-udemy/
-../microservices_architecture.png
-../microservicio_old/
-../test-file.txt
-../test.txt
+# Archivos Java y de configuración
+*.class
+*.jar
+application.properties
+maven-wrapper.properties
 
-# Regla general para ignorar todo fuera del directorio actual
-../*/
+# Archivos Docker
+docker-compose.yml
+Dockerfile
+
+# Archivos SQL y de datos
+r1-create_schema.txt
+r1-data.txt
+
+# Archivos HTML y multimedia
+index.html
+*.png
+
+# Archivos Maven
+pom.xml
+
+# Archivos de texto y pruebas
+test.txt
+test-file.txt
+
+# Archivos específicos de IDE
+.idea/
+*.iml
