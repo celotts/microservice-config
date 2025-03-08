@@ -1,4 +1,4 @@
-HELP.md
+BHELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -60,4 +60,24 @@ package.json
 .idea/
 
 *.log
+# Ignorar proyectos y directorios externos
+../../IdeaProjects/
+../../api_crud_*/
+../../microservice-udemy/
+../../api_reservation_old/
+../../microservicio_old/
+../../*.txt
+../../*.png
 
+# Archivos de configuración adicionales
+.idea/
+*.iml
+.vscode/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Configuraciones locales
+.env
+*.log
